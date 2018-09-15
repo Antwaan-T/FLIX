@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		827594B92149FF0900332EA1 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827594B82149FF0900332EA1 /* NowPlayingViewController.swift */; };
 		82A666892142E4A000C38E0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A666882142E4A000C38E0F /* AppDelegate.swift */; };
 		82A6668E2142E4A000C38E0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6668C2142E4A000C38E0F /* Main.storyboard */; };
 		82A666902142E4A100C38E0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A6668F2142E4A100C38E0F /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		827594B82149FF0900332EA1 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		82A666852142E4A000C38E0F /* FLIX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLIX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A666882142E4A000C38E0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6668D2142E4A000C38E0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,9 +99,10 @@
 		82A666872142E4A000C38E0F /* FLIX */ = {
 			isa = PBXGroup;
 			children = (
+				827594B82149FF0900332EA1 /* NowPlayingViewController.swift */,
+				82A666B6214316AC00C38E0F /* PhotosViewController.swift */,
 				82A666882142E4A000C38E0F /* AppDelegate.swift */,
 				82A6668C2142E4A000C38E0F /* Main.storyboard */,
-				82A666B6214316AC00C38E0F /* PhotosViewController.swift */,
 				82A6668F2142E4A100C38E0F /* Assets.xcassets */,
 				82A666912142E4A100C38E0F /* LaunchScreen.storyboard */,
 				82A666942142E4A100C38E0F /* Info.plist */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82A666B7214316AC00C38E0F /* PhotosViewController.swift in Sources */,
+				827594B92149FF0900332EA1 /* NowPlayingViewController.swift in Sources */,
 				82A666892142E4A000C38E0F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
