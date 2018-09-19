@@ -4,20 +4,46 @@
 //
 //  Created by user143130 on 9/12/18.
 //  Copyright © 2018 Antwaan ThomasMorgan. All rights reserved.
-//
+// 
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
+
+
+
 
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var TableView: UITableView!
     
+    var movies: [[String: Any]] = []
+    var refreshcontrol: UIRefreshControl!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        refreshcontrol = UIRefreshControl()
         
-        TableView.dataSource = self
+        refreshcontrol.addTarget(self, action: #selector
+        (NowPlayingViewController.pullrefersh(_:)), for: .valueChanged)
+       
+        TableView.insertSubview(refreshcontrol, at: 0)
+        
+        TableView.dataSource = self; fetchmovies()
+ 
+    }
+    
+    @objc func pullrefersh (_ refreshcontrol: UIRefreshControl)
+    {
+      fetchmovies()
+    }
+    
+    func fetchmovies ()
+    {
+       
+        TableView.rowHeight = 200
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -32,22 +58,41 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
             {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
-                for movie in movies
-                {
-                    let title = movie["title"] as! String
-                    print (title)
-                }
+                self.movies = movies
+                self.TableView.reloadData()
+                self.refreshcontrol.endRefreshing()
+                
             }
         }
         task.resume()
+        
     }
     
-    func TableView(_ TableView:UITableView, numberOfRowsInSection section: Int)-> Int{return 10}
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int)-> Int{return movies.count}
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = TableView.dequeueReusableCell(withIdentifier: "MovieCell", for: <#T##IndexPath#>)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+       
+        
+        let movie = movies[indexPath.row]
+        let title  = movie["title"] as! String
+        let overview = movie["overview"] as! String
+        cell.titlelabel.text=title
+        cell.overview.text=overview
+        
+        let posterPathString = movie["poster_path"] as! String
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        
+        let posterURL = URL(string: baseURLString + posterPathString)!
+        cell.movieposter.af_setImage(withURL: posterURL)
+        
+        
+        
         return cell
+        
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
