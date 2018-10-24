@@ -9,11 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-
-
-
-
-
+ 
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var TableView: UITableView!
@@ -92,7 +88,15 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         return cell
         
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = TableView.indexPath(for: cell)
+        {
+        let movie = movies[indexPath.row]
+        let detailViewController = segue.destination as! DetailViewController
+        detailViewController.movie = movie
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
